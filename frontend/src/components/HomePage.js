@@ -35,14 +35,17 @@ export default function HomePage(props){
                 </Grid>
             );
     };
-
+    const clearRoomCode = () =>{
+        setRoomCode(null);
+    };
+    
     return (
         <Router>
             <Routes>
                 <Route exact path="/" element={roomCode ? (<Navigate replace to={`/room/${roomCode}`} />) : RenderHomePage()} />
                 <Route path='/join' element={<RoomJoinPage/>}/>
                 <Route path='/create' element={<CreateRoomPage/>}/>
-                <Route path='/room/:roomCode' element={<Room/>}/>
+                <Route path='/room/:roomCode' element={<Room leaveRoomCallback={clearRoomCode}/>}/>
             </Routes>
         </Router>);
     
