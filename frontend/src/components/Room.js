@@ -31,7 +31,7 @@ export default function Room(props) {
             setguestCanPause(data.guest_can_pause);
             setisHost(data.is_host);
         });
-    },[]);
+    },[showSettings]);
 
     const handleLeaveButtonPress = () =>{
         const requestOptions = {
