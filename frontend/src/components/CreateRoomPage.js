@@ -12,7 +12,7 @@ import {
     Collapse,
  } from '@mui/material';
  import {Link, useNavigate} from 'react-router-dom';
- import { Alert } from '@mui/lab';
+ import { Alert } from '@mui/material';
 
 export default function CreateRoomPage(props){
     
