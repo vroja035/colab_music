@@ -5,6 +5,30 @@ import { PlayArrow, SkipNext, Pause } from "@mui/icons-material";
 export default function MusicPlayer(props){
     
     const songProgress = (props.time / props.duration) * 100;
+
+    const pauseSong = () =>{
+        const requestOptions = {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/son'},
+        };
+        fetch('/spotify/pause', requestOptions);
+    };
+
+    const playSong = () =>{
+        const requestOptions = {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/son'},
+        };
+        fetch('/spotify/play', requestOptions);
+    };
+
+    const skipSong = () =>{
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/son'},
+        };
+        fetch('/spotify/skip', requestOptions);
+    };
     
     return(
         <Card>
@@ -21,9 +45,10 @@ export default function MusicPlayer(props){
                     <Typography color='textSecondary' variant='subtitle1'> {props.artist} </Typography>
 
                     <div>
-                        <IconButton> {props.is_playing ? <Pause/> : <PlayArrow/>} </IconButton>
+                        
+                        {props.is_playing ? <IconButton onClick={pauseSong}><Pause/></IconButton> : <IconButton onClick={playSong}><PlayArrow/></IconButton>}
 
-                        <IconButton> <SkipNext/> </IconButton>
+                        <IconButton onClick={skipSong}> <SkipNext/> {props.votes} /{' '}{props.votes_needed} </IconButton>
                     </div>
 
                 </Grid>
