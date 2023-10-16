@@ -141,6 +141,11 @@ class SkipSong(APIView):
             skip_song(room.host)
         else:
             vote = Vote(user=self.request.session.session_key, room=room, song_id=room.current_song)
+
+            #only allows user to vote once
+            if Vote.objects.filter(user=self.request.session.session_key, room=room, song_id=room.current_song).exists():
+                return Response({}, status=status.HTTP_403_FORBIDDEN)
+            
             vote.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
